@@ -150,7 +150,7 @@ This should have built the `lfs` program in the top-level directory.
 From here we will need a block device. If you don't have removable storage
 handy, you can use a file-backed block device with FreeBSD's loop devices:
 ``` bash
-dd if=/dev/zero of=image bs=1M count=1                                  # create a 1 MB image
+dd if=/dev/zero of=image bs=1m count=1                                  # create a 1 MB image
 hdiutil attach -imagekey diskimage-class=CRawDiskImage -nomount image   # attach the loop device
 sudo chmod 666 /dev/diskX                                               # make loop device user accessible,
 ```
