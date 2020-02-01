@@ -3,7 +3,7 @@
 A FUSE wrapper that puts the littlefs in user-space.
 
 **FUSE** - https://github.com/libfuse/libfuse  
-**littlefs** - https://github.com/geky/littlefs  
+**littlefs** - https://github.com/ARMmbed/littlefs
 
 This project allows you to mount littlefs directly in a host PC.
 This allows you to easily debug an embedded system using littlefs on
