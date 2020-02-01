@@ -1,0 +1,8 @@
+*.o
+*.d
+*.a
+lfs
+
+# submodule
+littlefs
+stamp-littlefs

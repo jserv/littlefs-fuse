@@ -6,10 +6,10 @@ CC = cc
 AR = ar
 SIZE = size
 
-SRC += $(wildcard *.c littlefs/*.c)
+SRC += littlefs/lfs.c littlefs/lfs_util.c
+SRC += lfs_fuse.c lfs_fuse_bd.c
 OBJ := $(SRC:.c=.o)
 DEP := $(SRC:.c=.d)
-ASM := $(SRC:.c=.s)
 
 ifdef DEBUG
 override CFLAGS += -O0 -g3
@@ -39,9 +39,14 @@ override CFLAGS += -D __BSD_VISIBLE
 override LFLAGS += -L /usr/local/lib
 endif
 
-all: $(TARGET)
+all: stamp-littlefs
 
-asm: $(ASM)
+stamp-littlefs:
+	git clone https://github.com/ARMmbed/littlefs
+	@test -f littlefs/lfs.c || (echo No littlefs found.; exit 1)
+	@test -f littlefs/lfs_util.c || (echo Incomplete littlefs implementation.; exit 1)
+	touch $@ littlefs
+	$(MAKE) $(TARGET)
 
 size: $(OBJ)
 	$(SIZE) -t $^
@@ -57,11 +62,11 @@ $(TARGET): $(OBJ)
 %.o: %.c
 	$(CC) -c -MMD $(CFLAGS) $< -o $@
 
-%.s: %.c
-	$(CC) -S $(CFLAGS) $< -o $@
-
 clean:
 	rm -f $(TARGET)
 	rm -f $(OBJ)
 	rm -f $(DEP)
-	rm -f $(ASM)
+
+distclean: clean
+	rm -rf littlefs
+	rm -f stamp-littlefs
