@@ -135,9 +135,9 @@ sudo mdconfig -du 0
 
 ## Usage on macOS
 
-littlefs-fuse requires [osxfuse](https://osxfuse.github.io/) for macOS:
+littlefs-fuse requires [macFUSE](https://macfuse.io/) for macOS:
 ```bash
-brew cask install osxfuse
+brew install --cask macfuse
 ```
 
 Once you have cloned littlefs-fuse, you can compile the program with make:
