@@ -42,7 +42,7 @@ endif
 all: stamp-littlefs
 
 stamp-littlefs:
-	git clone https://github.com/ARMmbed/littlefs
+	git clone https://github.com/littlefs-project/littlefs
 	@test -f littlefs/lfs.c || (echo No littlefs found.; exit 1)
 	@test -f littlefs/lfs_util.c || (echo Incomplete littlefs implementation.; exit 1)
 	touch $@ littlefs
